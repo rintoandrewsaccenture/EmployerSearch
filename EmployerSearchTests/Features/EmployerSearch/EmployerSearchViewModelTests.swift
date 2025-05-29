@@ -10,8 +10,7 @@ final class EmployerSearchViewModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let secureStorage = SecureStorage(keychainService: MockKeychainService())
-        mockCache = MockEmployerCache(secureStorage: secureStorage)
+        mockCache = MockEmployerCache()
         mockAPI = MockEmployerRepository()
         viewModel = EmployerSearchViewModel(api: mockAPI, cache: mockCache)
     }

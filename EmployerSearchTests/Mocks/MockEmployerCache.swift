@@ -4,8 +4,6 @@ import Foundation
 final class MockEmployerCache: EmployerCacheProtocol {
     var storage: [String: [Employer]] = [:]
     
-    init(secureStorage: SecureStorageProtocol?) {}
-
     func save(_ employers: [Employer], for query: String) {
         storage[query] = employers
     }

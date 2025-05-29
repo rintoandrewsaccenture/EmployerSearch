@@ -32,10 +32,9 @@ final class EmployerSearchViewModel: ObservableObject {
         }
 
         do {
-            let results = try await api.searchEmployers(query: query)
-            employers = results
-            if !results.isEmpty {
-                cache?.save(results, for: query)
+            employers = try await api.searchEmployers(query: query)
+            if !employers.isEmpty {
+                cache?.save(employers, for: query)
             }
             state = .loaded
         } catch {
