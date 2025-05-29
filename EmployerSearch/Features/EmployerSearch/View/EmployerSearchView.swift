@@ -73,29 +73,28 @@ struct EmployerSearchView: View {
         }
     }
 
+    @ViewBuilder
     private var loadedView: some View {
-        Group {
-            if viewModel.employers.isEmpty {
-                VStack {
-                    Spacer()
-                    Text("No employers found.")
-                        .foregroundColor(.gray)
-                        .padding()
-                    Spacer()
-                }
-            } else {
-                ScrollView {
-                    LazyVStack {
-                        ForEach(viewModel.employers) { employer in
-                            EmployerDetailView(employerId: employer.employerId,
-                                     name: employer.name,
-                                     place: employer.place,
-                                     discountPercentage: employer.discountPercentage)
-                        }
+        if viewModel.employers.isEmpty {
+            VStack {
+                Spacer()
+                Text("No employers found.")
+                    .foregroundColor(.gray)
+                    .padding()
+                Spacer()
+            }
+        } else {
+            ScrollView {
+                LazyVStack {
+                    ForEach(viewModel.employers) { employer in
+                        EmployerDetailView(employerId: employer.employerId,
+                                           name: employer.name,
+                                           place: employer.place,
+                                           discountPercentage: employer.discountPercentage)
                     }
                 }
-                .padding(.horizontal, 16)
             }
+            .padding(.horizontal, 16)
         }
     }
 }
