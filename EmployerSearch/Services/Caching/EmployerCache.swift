@@ -24,6 +24,9 @@ final class EmployerCache: EmployerCacheProtocol {
         guard let cacheDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else {
             throw CacheError.cacheDirectoryNotFound
         }
+#if DEBUG
+        print(cacheDirectory)
+#endif
         let filename = query.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? UUID().uuidString
         return cacheDirectory.appendingPathComponent("employer_\(filename).secure".lowercased())
     }
