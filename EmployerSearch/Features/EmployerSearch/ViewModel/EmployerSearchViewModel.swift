@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 final class EmployerSearchViewModel: ObservableObject {
 
     enum LoadingState: Equatable {
@@ -24,7 +23,6 @@ final class EmployerSearchViewModel: ObservableObject {
 
     @MainActor
     func search() async {
-        guard !query.isEmpty else { return }
         state = .loading
 
         if let cached = cache?.load(for: query) {
