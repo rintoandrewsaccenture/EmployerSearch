@@ -13,7 +13,7 @@ final class EmployerRepository: EmployerRepositoryProtocol {
     }
 
     func searchEmployers(query: String) async throws -> [Employer] {
-        let request = EmployerRequest(filter: query).urlRequest()
+        let request = EmployerRequest(filter: query, maxRows: 100).urlRequest()
         let employers: [Employer] = try await httpService.sendRequest(request)
         return employers
     }

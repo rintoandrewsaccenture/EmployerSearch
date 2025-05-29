@@ -8,17 +8,20 @@ struct EmployerSearchView: View {
     }
 
     var body: some View {
-        userInputView
-        switch viewModel.state {
-        case .idle:
-            idleView
-        case .loading:
-            loadingView
-        case .loaded:
-            loadedView
-        case .failed(let string):
-            failedView(string)
+        VStack(spacing: 0) {
+            userInputView
+            switch viewModel.state {
+            case .idle:
+                idleView
+            case .loading:
+                loadingView
+            case .loaded:
+                loadedView
+            case .failed(let string):
+                failedView(string)
+            }
         }
+        .background(Color.gray.opacity(0.1))
     }
 
     private var userInputView: some View {
@@ -36,7 +39,7 @@ struct EmployerSearchView: View {
                 }
                 .disabled(viewModel.query.isEmpty)
             }
-            .padding(.all, 16)
+            .padding(.horizontal, 16)
         }
     }
 
@@ -84,13 +87,14 @@ struct EmployerSearchView: View {
                 ScrollView {
                     LazyVStack {
                         ForEach(viewModel.employers) { employer in
-                            VStack {
-                                Text(employer.name).font(.headline)
-                                Text(employer.place).font(.headline)
-                            }
+                            EmployerDetailView(employerId: employer.employerId,
+                                     name: employer.name,
+                                     place: employer.place,
+                                     discountPercentage: employer.discountPercentage)
                         }
                     }
                 }
+                .padding(.horizontal, 16)
             }
         }
     }
